@@ -18,6 +18,7 @@ import org.bukkit.event.block.BlockFormEvent;
 import org.bukkit.event.weather.LightningStrikeEvent;
 import org.bukkit.event.weather.ThunderChangeEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
+import org.bukkit.event.world.WorldSaveEvent;
 
 public class WorldServer extends World implements org.bukkit.BlockChangeDelegate {
     // CraftBukkit end
@@ -766,6 +767,8 @@ public class WorldServer extends World implements org.bukkit.BlockChangeDelegate
                 iprogressupdate.c("Saving chunks");
             }
 
+            WorldSaveEvent worldsave = new WorldSaveEvent(this.getWorld());
+            this.getServer().getPluginManager().callEvent(worldsave);
             this.chunkProvider.saveChunks(flag, iprogressupdate);
         }
     }
